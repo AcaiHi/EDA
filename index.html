@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>首頁</title>
+    <style>
+      /* 加載畫面和進度條的樣式 */
+      #loading {
+        display: none; /* 初始狀態設為隱藏 */
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: white;
+        text-align: center;
+        line-height: 100vh;
+      }
+
+      #progressbar {
+        width: 0%;
+        height: 30px;
+        background-color: green;
+        text-align: center;
+        line-height: 30px;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 加載畫面 -->
+    <div id="loading">
+      加載中...
+      <div id="progressbar">0%</div>
+    </div>
+
+    <!-- 主要內容 -->
+    <h1>歡迎來到我的網站</h1>
+    <p>以下是其他頁面的連結：</p>
+    <ul>
+      <li><a href="ENT.html" class="load-link">ENT</a></li>
+      <li><a href="GS.html" class="load-link">GS</a></li>
+      <li><a href="GU.html" class="load-link">GU</a></li>
+      <li><a href="OPH.html" class="load-link">OPH</a></li>
+      <li><a href="ORTH.html" class="load-link">ORTH</a></li>
+    </ul>
+
+    <!-- JavaScript 用於進度條和顯示加載畫面 -->
+    <script>
+      document.querySelectorAll(".load-link").forEach((link) => {
+        link.addEventListener("click", function (event) {
+          event.preventDefault(); // 阻止連結的默認行為
+          var href = this.getAttribute("href");
+          showLoadingScreen(href); // 顯示加載畫面，然後導航到連結
+        });
+      });
+
+      function showLoadingScreen(href) {
+        document.getElementById("loading").style.display = "block";
+        move(href);
+      }
+
+      function move(href) {
+        var elem = document.getElementById("progressbar");
+        var width = 0;
+        var id = setInterval(frame, 10); // 調整這裡可以改變進度條速度
+        function frame() {
+          if (width >= 100) {
+            clearInterval(id);
+            window.location = href; // 加載完成後導航到連結
+          } else {
+            width++;
+            elem.style.width = width + "%";
+            elem.innerHTML = width * 1 + "%";
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
