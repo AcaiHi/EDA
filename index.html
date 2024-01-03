@@ -44,13 +44,18 @@
       <li><a href="ORTH.html" class="load-link">ORTH</a></li>
     </ul>
 
-    <!-- JavaScript 用於進度條和顯示加載畫面 -->
     <script>
+      // 當頁面加載完成時隱藏加載畫面
+      window.onload = function () {
+        document.getElementById("loading").style.display = "none";
+      };
+
+      // 加載連結的事件處理
       document.querySelectorAll(".load-link").forEach((link) => {
         link.addEventListener("click", function (event) {
-          event.preventDefault(); // 阻止連結的默認行為
+          event.preventDefault();
           var href = this.getAttribute("href");
-          showLoadingScreen(href); // 顯示加載畫面，然後導航到連結
+          showLoadingScreen(href);
         });
       });
 
@@ -62,11 +67,11 @@
       function move(href) {
         var elem = document.getElementById("progressbar");
         var width = 0;
-        var id = setInterval(frame, 10); // 調整這裡可以改變進度條速度
+        var id = setInterval(frame, 10);
         function frame() {
           if (width >= 100) {
             clearInterval(id);
-            window.location = href; // 加載完成後導航到連結
+            window.location = href;
           } else {
             width++;
             elem.style.width = width + "%";
