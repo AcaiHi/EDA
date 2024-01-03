@@ -69,7 +69,7 @@
       function move(href) {
         var elem = document.getElementById("progressbar");
         var width = 0;
-        var id = setInterval(frame, 10); // 調整這裡可以改變進度條速度
+        var id = setInterval(frame, 5); // 調整這裡可以改變進度條速度
         function frame() {
           if (width >= 100) {
             clearInterval(id);
